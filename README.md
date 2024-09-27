@@ -62,7 +62,8 @@ Close Other WSL Instances: Before running the installer, ensure that no other WS
 * MariaDB Service: The installer starts MariaDB manually due to WSL limitations. Ensure MariaDB is running when you need it.
 * Permissions: If you encounter any permissions issues, verify that directories and files have the correct ownership (`mysql:mysql` for MariaDB data directories).
 
-## * 🐞 Troubleshooting * Bench Start Issues: If `bench start` fails, check that no other benches are running and that MariaDB is active. 
+## * 🐞 Troubleshooting * 
+* Bench Start Issues: If `bench start` fails, check that no other benches are running and that MariaDB is active. 
 * MariaDB Connection Errors: Ensure MariaDB is running and accepting connections on `127.0.0.1`. The script configures MariaDB to listen on localhost.
 * Port Conflicts: If port `8000` is already in use, you can specify a different port when starting the bench:
 
