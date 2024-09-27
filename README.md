@@ -25,39 +25,48 @@ Follow these steps to install Frappe and optionally ERPNext and HRMS on your WSL
 
 Open your WSL terminal and clone the repository:
 
-Copy
 
-`git clone https://github.com/kamikazce/Frappe-ErpNext-Autoinstall-WSL.git 2\. Navigate to the Directory ``` bash`
+`git clone https://github.com/kamikazce/Frappe-ErpNext-Autoinstall-WSL.git`
 
-Copy code `cd Frappe-ErpNext-Autoinstall-WSL` 3\. Make the Installer Executable
+`cd Frappe-ErpNext-Autoinstall-WSL`
 
-Copy
+3. Make the Installer Executable
 
-`bash`
+`chmod +x install.sh` 
 
-Copy code `chmod +x install.sh` 4\. Run the Installer Execute the installer script with root privileges:
+4. Run the Installer Execute the installer script with root privileges:
 
-Copy
+`sudo ./install.sh` 
 
-`bash`
+## 🛠 Usage The installer will guide you through several prompts: 
+1. Create a New User: You can choose to create a new system user or use the current one.
+2. MariaDB Root Password: Set a password for the MariaDB root user.
+3. Administrator Password: Set a password for the Frappe administrator account.
+4. Site Name: Specify the name of the new Frappe site.
+5. Install ERPNext: Choose whether to install the ERPNext application.
+6. Install HRMS: Choose whether to install the HRMS application.
+7. Starting the Bench After the installation is complete, switch to the specified user and start the bench:
 
-Copy code `sudo ./install.sh` 🛠 Usage The installer will guide you through several prompts: 1. Create a New User: You can choose to create a new system user or use the current one. 2. MariaDB Root Password: Set a password for the MariaDB root user. 3. Administrator Password: Set a password for the Frappe administrator account. 4. Site Name: Specify the name of the new Frappe site. 5. Install ERPNext: Choose whether to install the ERPNext application. 6. Install HRMS: Choose whether to install the HRMS application. Starting the Bench After the installation is complete, switch to the specified user and start the bench:
+`sudo su - your_username cd /var/bench/frappe-bench15_unique_id/ bench start` 
+* Replace `your_username` with the username you selected during installation. * Replace `unique_id` with the unique identifier generated during installation (e.g., `frappe-bench15_a3b99f84`).
 
-Copy
+* Accessing Your Site Open your web browser and navigate to:
 
-`bash`
+`http://localhost:8000` 
+Log in using: 
+* Username: `Administrator`
+* Password: The administrator password you set during installation.
 
-Copy code `sudo su - your_username cd /var/bench/frappe-bench15_unique_id/ bench start` * Replace `your_username` with the username you selected during installation. * Replace `unique_id` with the unique identifier generated during installation (e.g., `frappe-bench15_a3b99f84`). Accessing Your Site Open your web browser and navigate to:
+## * ⚠ Important Notes * 
+Close Other WSL Instances: Before running the installer, ensure that no other WSL instances with Frappe benches are running. Having multiple benches running simultaneously can cause conflicts and prevent `bench start` from working correctly. 
+* MariaDB Service: The installer starts MariaDB manually due to WSL limitations. Ensure MariaDB is running when you need it.
+* Permissions: If you encounter any permissions issues, verify that directories and files have the correct ownership (`mysql:mysql` for MariaDB data directories).
 
-Copy
+## * 🐞 Troubleshooting * Bench Start Issues: If `bench start` fails, check that no other benches are running and that MariaDB is active. 
+* MariaDB Connection Errors: Ensure MariaDB is running and accepting connections on `127.0.0.1`. The script configures MariaDB to listen on localhost.
+* Port Conflicts: If port `8000` is already in use, you can specify a different port when starting the bench:
 
-`arduino`
+`bench start --port 8001` 
 
-Copy code `http://localhost:8000` Log in using: * Username: `Administrator` * Password: The administrator password you set during installation. ⚠ Important Notes * Close Other WSL Instances: Before running the installer, ensure that no other WSL instances with Frappe benches are running. Having multiple benches running simultaneously can cause conflicts and prevent `bench start` from working correctly. * MariaDB Service: The installer starts MariaDB manually due to WSL limitations. Ensure MariaDB is running when you need it. * Permissions: If you encounter any permissions issues, verify that directories and files have the correct ownership (`mysql:mysql` for MariaDB data directories). 🐞 Troubleshooting * Bench Start Issues: If `bench start` fails, check that no other benches are running and that MariaDB is active. * MariaDB Connection Errors: Ensure MariaDB is running and accepting connections on `127.0.0.1`. The script configures MariaDB to listen on localhost. * Port Conflicts: If port `8000` is already in use, you can specify a different port when starting the bench:
-
-Copy
-
-`bash`
-
-Copy code `bench start --port 8001` 🤝 Contributing We welcome contributions! If you have suggestions for improvements or encounter any issues, feel free to open an issue or submit a pull request on GitHub.
+🤝 Contributing We welcome contributions! If you have suggestions for improvements or encounter any issues, feel free to open an issue or submit a pull request on GitHub.
 
